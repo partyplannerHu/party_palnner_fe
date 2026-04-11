@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { listings } from '../data'; 
 import { MapPin, Star, Trash2, Heart } from 'lucide-react';
 
 const FavoritesPage = () => {
-  const [favorites, setFavorites] = useState(listings.slice(0, 3));
+  const [favorites, setFavorites] = useState([]);
 
   const removeFavorite = (id) => {
     if (window.confirm("Remove this item from favorites?")) {

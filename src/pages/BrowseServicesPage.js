@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { MapPin, Star, Filter, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link, useSearchParams } from 'react-router-dom';
 import categoryService from '../services/categoryService';
+import subcategoryService from '../services/subcategoryService';
 import listingService from '../services/listingService';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { handleApiError } from '../utils/errorHandler';
@@ -11,12 +12,15 @@ const BrowseServicesPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [categories, setCategories] = useState([]);
+  const [subcategories, setSubcategories] = useState([]);
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   // Filter states
   const [selectedCategory, setSelectedCategory] = useState(searchParams.get('category') || 'All');
+  const [selectedSubcategory, setSelectedSubcategory] = useState('All');
+  const [searchQuery, setSearchQuery] = useState(searchParams.get('search') || '');
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
 
@@ -41,6 +45,27 @@ const BrowseServicesPage = () => {
     fetchCategories();
   }, []);
 
+  // Fetch subcategories when category changes
+  useEffect(() => {
+    const fetchSubcategories = async () => {
+      if (selectedCategory && selectedCategory !== 'All') {
+        try {
+          const response = await subcategoryService.getSubcategoriesByCategory(selectedCategory);
+          if (response.success) {
+            setSubcategories(response.data);
+          }
+        } catch (err) {
+          console.error('Error fetching subcategories:', err);
+          setSubcategories([]);
+        }
+      } else {
+        setSubcategories([]);
+        setSelectedSubcategory('All');
+      }
+    };
+    fetchSubcategories();
+  }, [selectedCategory]);
+
   // Fetch listings when filters or page change
   useEffect(() => {
     const fetchListings = async () => {
@@ -54,9 +79,19 @@ const BrowseServicesPage = () => {
           isActive: true,
         };
 
+        // Add search query
+        if (searchQuery) {
+          params.search = searchQuery;
+        }
+
         // Add category filter
         if (selectedCategory !== 'All') {
           params.categoryId = selectedCategory;
+        }
+
+        // Add subcategory filter
+        if (selectedSubcategory !== 'All') {
+          params.subcategoryId = selectedSubcategory;
         }
 
         // Add price range filters
@@ -82,10 +117,11 @@ const BrowseServicesPage = () => {
     };
 
     fetchListings();
-  }, [selectedCategory, currentPage, minPrice, maxPrice]);
+  }, [selectedCategory, selectedSubcategory, searchQuery, currentPage, minPrice, maxPrice]);
 
   const handleCategoryChange = (categoryId) => {
     setSelectedCategory(categoryId);
+    setSelectedSubcategory('All'); // Reset subcategory when category changes
     setCurrentPage(1); // Reset to first page
   };
 
@@ -120,10 +156,25 @@ const BrowseServicesPage = () => {
 
         {/* العنوان العلوي */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Browse Services</h1>
-          <p className="text-gray-500 mt-1">
-            {loading ? 'Loading...' : `Showing ${listings.length} of ${totalCount} results`}
-          </p>
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900">Browse Services</h1>
+              <p className="text-gray-500 mt-1">
+                {loading ? 'Loading...' : `Showing ${listings.length} of ${totalCount} results`}
+              </p>
+            </div>
+
+            {/* Search bar */}
+            <div className="w-full md:w-96">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search services..."
+                className="w-full px-4 py-2 border border-gray-200 rounded-lg outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition"
+              />
+            </div>
+          </div>
         </div>
 
         <div className="flex flex-col md:flex-row gap-8">
@@ -169,6 +220,40 @@ const BrowseServicesPage = () => {
                   ))}
                 </div>
               </div>
+
+              {/* Subcategory Filter - shows only if category selected */}
+              {selectedCategory !== 'All' && subcategories.length > 0 && (
+                <div>
+                  <h3 className="font-semibold mb-4 text-gray-800">Subcategory</h3>
+                  <div className="space-y-3 max-h-60 overflow-y-auto">
+                    <label className="flex items-center gap-3 cursor-pointer group">
+                      <input
+                        type="radio"
+                        name="subcategory"
+                        checked={selectedSubcategory === 'All'}
+                        onChange={() => setSelectedSubcategory('All')}
+                        className="w-4 h-4 text-indigo-600 border-gray-300 focus:ring-indigo-500"
+                      />
+                      <span className="text-gray-600 group-hover:text-indigo-600 transition">All Subcategories</span>
+                    </label>
+
+                    {subcategories.map((sub) => (
+                      <label key={sub._id} className="flex items-center gap-3 cursor-pointer group">
+                        <input
+                          type="radio"
+                          name="subcategory"
+                          checked={selectedSubcategory === sub._id}
+                          onChange={() => setSelectedSubcategory(sub._id)}
+                          className="w-4 h-4 text-indigo-600 border-gray-300 focus:ring-indigo-500"
+                        />
+                        <span className="text-gray-600 group-hover:text-indigo-600 transition">
+                          {sub.name}
+                        </span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               {/* فلتر السعر */}
               <div>

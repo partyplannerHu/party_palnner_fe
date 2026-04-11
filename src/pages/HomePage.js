@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { MapPin, Star } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import categoryService from '../services/categoryService';
 import listingService from '../services/listingService';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -8,10 +8,12 @@ import { handleApiError } from '../utils/errorHandler';
 import { getImageUrl } from '../utils/imageUrl';
 
 const HomePage = () => {
+  const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,6 +43,16 @@ const HomePage = () => {
 
     fetchData();
   }, []);
+
+  // Handle search form submission
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/services?search=${encodeURIComponent(searchQuery.trim())}`);
+    } else {
+      navigate('/services');
+    }
+  };
 
   if (loading) {
     return <LoadingSpinner message="Loading homepage..." />;
@@ -76,16 +88,18 @@ const HomePage = () => {
         
         {/* مربع البحث */}
         <div className="max-w-2xl mx-auto px-4">
-          <div className="bg-white rounded-full p-2 flex shadow-lg">
-            <input 
-              type="text" 
-              placeholder="Search for venues, photographers, caterers..." 
+          <form onSubmit={handleSearch} className="bg-white rounded-full p-2 flex shadow-lg">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search for venues, photographers, caterers..."
               className="flex-1 px-6 py-3 rounded-full outline-none text-gray-700"
             />
-            <button className="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-700 transition">
+            <button type="submit" className="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-700 transition">
               Search
             </button>
-          </div>
+          </form>
         </div>
       </div>
 

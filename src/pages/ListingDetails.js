@@ -80,6 +80,9 @@ const ListingDetails = () => {
               />
               <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-bold text-indigo-600 shadow-sm">
                 {service.categoryId?.name || 'Service'}
+                {service.subcategoryId?.name && (
+                  <span className="text-gray-500"> • {service.subcategoryId.name}</span>
+                )}
               </div>
 
               {/* Image navigation dots */}

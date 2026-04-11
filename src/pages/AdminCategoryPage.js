@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Plus, Trash2, Edit, Save, X, Loader2 } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Plus, Trash2, Edit, Save, X, Loader2, ArrowRight } from 'lucide-react';
 import { toast } from 'react-toastify';
 import categoryService from '../services/categoryService';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -150,13 +151,22 @@ const AdminCategoryPage = () => {
             <h1 className="text-3xl font-extrabold text-gray-900">Category Management</h1>
             <p className="text-gray-500 mt-1">Add, edit, or remove service categories dynamically</p>
           </div>
-          <button 
-            onClick={() => setIsAdding(true)}
-            className="flex items-center gap-2 bg-indigo-600 text-white px-5 py-2.5 rounded-xl font-bold hover:bg-indigo-700 transition shadow-lg shadow-indigo-200"
-          >
-            <Plus size={20} />
-            Add Category
-          </button>
+          <div className="flex gap-3">
+            <Link
+              to="/admin/subcategories"
+              className="flex items-center gap-2 bg-gray-600 text-white px-5 py-2.5 rounded-xl font-bold hover:bg-gray-700 transition shadow-lg"
+            >
+              Manage Subcategories
+              <ArrowRight size={18} />
+            </Link>
+            <button
+              onClick={() => setIsAdding(true)}
+              className="flex items-center gap-2 bg-indigo-600 text-white px-5 py-2.5 rounded-xl font-bold hover:bg-indigo-700 transition shadow-lg shadow-indigo-200"
+            >
+              <Plus size={20} />
+              Add Category
+            </button>
+          </div>
         </div>
 
         {/* نموذج إضافة فئة (يظهر عند الضغط على الزر) */}

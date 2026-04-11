@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Upload, DollarSign, MapPin, Phone, Type, Image as ImageIcon, X, Loader2, Plus, Mail } from 'lucide-react';
 import { toast } from 'react-toastify';
 import categoryService from '../services/categoryService';
+import subcategoryService from '../services/subcategoryService';
 import listingService from '../services/listingService';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { handleApiError } from '../utils/errorHandler';
@@ -11,6 +12,7 @@ const AddListingPage = () => {
   const navigate = useNavigate();
 
   const [categories, setCategories] = useState([]);
+  const [availableSubcategories, setAvailableSubcategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [uploadingImages, setUploadingImages] = useState(false);
@@ -20,6 +22,7 @@ const AddListingPage = () => {
   const [formData, setFormData] = useState({
     title: '',
     categoryId: '',
+    subcategoryId: '',
     description: '',
     // Location fields
     address: '',
@@ -68,6 +71,26 @@ const AddListingPage = () => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  // Handle category change - fetch subcategories
+  const handleCategoryChange = async (e) => {
+    const categoryId = e.target.value;
+    setFormData({ ...formData, categoryId, subcategoryId: '' });
+
+    if (categoryId) {
+      try {
+        const response = await subcategoryService.getSubcategoriesByCategory(categoryId);
+        if (response.success) {
+          setAvailableSubcategories(response.data);
+        }
+      } catch (err) {
+        console.error('Error fetching subcategories:', err);
+        setAvailableSubcategories([]);
+      }
+    } else {
+      setAvailableSubcategories([]);
+    }
   };
 
   // Handle file selection
@@ -172,6 +195,7 @@ const AddListingPage = () => {
       const listingData = {
         title: formData.title,
         categoryId: formData.categoryId,
+        subcategoryId: formData.subcategoryId,
         description: formData.description,
         images: imagePaths,
         location: {
@@ -272,12 +296,38 @@ const AddListingPage = () => {
                     required
                     value={formData.categoryId}
                     className="block w-full border-gray-300 rounded-lg border focus:ring-indigo-500 focus:border-indigo-500 p-3 outline-none bg-white"
-                    onChange={handleChange}
+                    onChange={handleCategoryChange}
                   >
                     <option value="">Select Category</option>
                     {categories.map((cat) => (
                       <option key={cat._id} value={cat._id}>
                         {cat.icon} {cat.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Subcategory */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Subcategory *</label>
+                  <select
+                    name="subcategoryId"
+                    required
+                    value={formData.subcategoryId}
+                    className="block w-full border-gray-300 rounded-lg border focus:ring-indigo-500 focus:border-indigo-500 p-3 outline-none bg-white disabled:bg-gray-100 disabled:cursor-not-allowed"
+                    onChange={handleChange}
+                    disabled={!formData.categoryId || availableSubcategories.length === 0}
+                  >
+                    <option value="">
+                      {!formData.categoryId
+                        ? 'Select category first'
+                        : availableSubcategories.length === 0
+                        ? 'No subcategories available'
+                        : 'Select Subcategory'}
+                    </option>
+                    {availableSubcategories.map((sub) => (
+                      <option key={sub._id} value={sub._id}>
+                        {sub.name}
                       </option>
                     ))}
                   </select>

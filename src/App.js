@@ -15,6 +15,7 @@ import AddListingPage from './pages/AddListingPage';
 import EditListingPage from './pages/EditListingPage';
 import ProviderDashboard from './pages/ProviderDashboard';
 import AdminCategoryPage from './pages/AdminCategoryPage';
+import AdminSubcategoryPage from './pages/AdminSubcategoryPage';
 import UserProfilePage from './pages/UserProfilePage';
 import FavoritesPage from './pages/FavoritesPage';
 
@@ -79,6 +80,14 @@ function App() {
               element={
                 <ProtectedRoute allowedRoles={['admin']}>
                   <AdminCategoryPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/subcategories"
+              element={
+                <ProtectedRoute allowedRoles={['admin']}>
+                  <AdminSubcategoryPage />
                 </ProtectedRoute>
               }
             />
