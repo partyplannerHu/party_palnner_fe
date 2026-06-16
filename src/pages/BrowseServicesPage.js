@@ -30,6 +30,7 @@ const BrowseServicesPage = () => {
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
   const [topRated, setTopRated] = useState(false);
+  const [priceSort, setPriceSort] = useState(''); // 'asc' | 'desc' | ''
 
   // Pagination states
   const [currentPage, setCurrentPage] = useState(1);
@@ -109,10 +110,13 @@ const BrowseServicesPage = () => {
           params.maxPrice = parseFloat(maxPrice);
         }
 
-        // Sort by top rated
+        // Sort
         if (topRated) {
           params.sortBy = 'averageRating';
           params.order = 'desc';
+        } else if (priceSort) {
+          params.sortBy = 'pricing.amount';
+          params.order = priceSort;
         }
 
         const response = await listingService.getListings(params);
@@ -130,7 +134,7 @@ const BrowseServicesPage = () => {
     };
 
     fetchListings();
-  }, [selectedCategory, selectedSubcategory, searchQuery, currentPage, minPrice, maxPrice, topRated]);
+  }, [selectedCategory, selectedSubcategory, searchQuery, currentPage, minPrice, maxPrice, topRated, priceSort]);
 
   // Load user's favorited listing IDs when authenticated
   useEffect(() => {
@@ -181,8 +185,28 @@ const BrowseServicesPage = () => {
   };
 
   const handleApplyFilters = () => {
-    setCurrentPage(1); // Reset to first page when applying filters
+    setCurrentPage(1);
   };
+
+  const clearAllFilters = () => {
+    setSelectedCategory('All');
+    setSelectedSubcategory('All');
+    setSearchQuery('');
+    setMinPrice('');
+    setMaxPrice('');
+    setTopRated(false);
+    setPriceSort('');
+    setCurrentPage(1);
+  };
+
+  const hasActiveFilters =
+    selectedCategory !== 'All' ||
+    selectedSubcategory !== 'All' ||
+    searchQuery !== '' ||
+    minPrice !== '' ||
+    maxPrice !== '' ||
+    topRated ||
+    priceSort !== '';
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -237,9 +261,19 @@ const BrowseServicesPage = () => {
           {/* 1. Sidebar - القائمة الجانبية للفلاتر */}
           <div className="w-full md:w-1/4">
             <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm sticky top-24">
-              <div className="flex items-center gap-2 mb-6 border-b border-gray-100 pb-4">
-                <Filter size={20} className="text-indigo-600" />
-                <h2 className="font-bold text-lg">Filters</h2>
+              <div className="flex items-center justify-between mb-6 border-b border-gray-100 pb-4">
+                <div className="flex items-center gap-2">
+                  <Filter size={20} className="text-indigo-600" />
+                  <h2 className="font-bold text-lg">Filters</h2>
+                </div>
+                {hasActiveFilters && (
+                  <button
+                    onClick={clearAllFilters}
+                    className="text-xs font-semibold text-red-500 hover:text-red-700 transition"
+                  >
+                    Clear All
+                  </button>
+                )}
               </div>
 
               {/* فلتر الفئات */}
@@ -325,6 +359,29 @@ const BrowseServicesPage = () => {
                     <span className="text-gray-600 group-hover:text-indigo-600 transition text-sm">Top Rated</span>
                   </div>
                 </label>
+              </div>
+
+              {/* Sort by Price */}
+              <div className="mb-8">
+                <h3 className="font-semibold mb-4 text-gray-800">Sort by Price</h3>
+                <div className="space-y-3">
+                  {[
+                    { value: '', label: 'Default' },
+                    { value: 'asc', label: 'Price: Low to High' },
+                    { value: 'desc', label: 'Price: High to Low' },
+                  ].map(opt => (
+                    <label key={opt.value} className="flex items-center gap-3 cursor-pointer group">
+                      <input
+                        type="radio"
+                        name="priceSort"
+                        checked={priceSort === opt.value}
+                        onChange={() => { setPriceSort(opt.value); setTopRated(false); setCurrentPage(1); }}
+                        className="w-4 h-4 text-indigo-600 border-gray-300 focus:ring-indigo-500"
+                      />
+                      <span className="text-gray-600 group-hover:text-indigo-600 transition text-sm">{opt.label}</span>
+                    </label>
+                  ))}
+                </div>
               </div>
 
               {/* فلتر السعر */}

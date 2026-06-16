@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { MapPin, Phone, ArrowLeft, CheckCircle, Mail, Heart } from 'lucide-react';
+import { MapPin, Phone, ArrowLeft, CheckCircle, Mail, Heart, ChevronLeft, ChevronRight } from 'lucide-react';
 import { toast } from 'react-toastify';
 import listingService from '../services/listingService';
 import favoriteService from '../services/favoriteService';
@@ -129,19 +129,40 @@ const ListingDetails = () => {
                 )}
               </div>
 
-              {/* Image navigation dots */}
+              {/* Arrow navigation */}
               {service.images && service.images.length > 1 && (
-                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
-                  {service.images.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => setCurrentImageIndex(index)}
-                      className={`w-2 h-2 rounded-full transition ${
-                        currentImageIndex === index ? 'bg-white w-6' : 'bg-white/50'
-                      }`}
-                    />
-                  ))}
-                </div>
+                <>
+                  <button
+                    onClick={() => setCurrentImageIndex(i => (i - 1 + service.images.length) % service.images.length)}
+                    className="absolute left-3 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white rounded-full p-2 transition"
+                  >
+                    <ChevronLeft size={22} />
+                  </button>
+                  <button
+                    onClick={() => setCurrentImageIndex(i => (i + 1) % service.images.length)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white rounded-full p-2 transition"
+                  >
+                    <ChevronRight size={22} />
+                  </button>
+
+                  {/* Dots */}
+                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                    {service.images.map((_, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setCurrentImageIndex(index)}
+                        className={`h-2 rounded-full transition-all ${
+                          currentImageIndex === index ? 'bg-white w-6' : 'bg-white/50 w-2'
+                        }`}
+                      />
+                    ))}
+                  </div>
+
+                  {/* Counter */}
+                  <div className="absolute bottom-4 right-4 bg-black/40 text-white text-xs px-2 py-1 rounded-full">
+                    {currentImageIndex + 1} / {service.images.length}
+                  </div>
+                </>
               )}
             </div>
 
