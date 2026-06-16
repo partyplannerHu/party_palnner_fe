@@ -1,18 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { MapPin, Star, Phone, User, ArrowLeft, CheckCircle, Mail } from 'lucide-react';
+import { MapPin, Phone, ArrowLeft, CheckCircle, Mail, Heart } from 'lucide-react';
+import { toast } from 'react-toastify';
 import listingService from '../services/listingService';
+import favoriteService from '../services/favoriteService';
 import LoadingSpinner from '../components/LoadingSpinner';
+import ReviewsSection from '../components/ReviewsSection';
+import StarRating from '../components/StarRating';
 import { handleApiError } from '../utils/errorHandler';
 import { getImageUrl } from '../utils/imageUrl';
+import { useAuth } from '../context/AuthContext';
 
 const ListingDetails = () => {
   const { id } = useParams();
+  const { isAuthenticated } = useAuth();
 
   const [service, setService] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isFavorited, setIsFavorited] = useState(false);
+  const [favLoading, setFavLoading] = useState(false);
+  const [liveRating, setLiveRating] = useState({ avg: 0, count: 0 });
+
+  const handleRatingUpdate = useCallback((avg, count) => {
+    setLiveRating({ avg, count });
+  }, []);
 
   useEffect(() => {
     const fetchListing = async () => {
@@ -25,6 +38,10 @@ const ListingDetails = () => {
 
         if (response.success) {
           setService(response.data);
+          setLiveRating({
+            avg: response.data.averageRating || 0,
+            count: response.data.reviewCount || 0,
+          });
 
           // Increment view count (fire and forget)
           listingService.incrementView(id).catch(err => {
@@ -40,6 +57,33 @@ const ListingDetails = () => {
 
     fetchListing();
   }, [id]);
+
+  // Check if this listing is favorited
+  useEffect(() => {
+    if (!isAuthenticated || !id) return;
+    favoriteService.checkFavorite(id)
+      .then(res => { if (res.success) setIsFavorited(res.isFavorited); })
+      .catch(() => {});
+  }, [id, isAuthenticated]);
+
+  const handleToggleFavorite = async () => {
+    if (!isAuthenticated) {
+      toast.info('Please login to save favorites');
+      return;
+    }
+    setFavLoading(true);
+    try {
+      const res = await favoriteService.toggleFavorite(id);
+      if (res.success) {
+        setIsFavorited(res.isFavorited);
+        toast.success(res.message);
+      }
+    } catch (err) {
+      toast.error(handleApiError(err));
+    } finally {
+      setFavLoading(false);
+    }
+  };
 
   if (loading) {
     return <LoadingSpinner message="Loading service details..." />;
@@ -104,13 +148,28 @@ const ListingDetails = () => {
             {/* القسم الأيسر: التفاصيل */}
             <div className="p-8 lg:p-12">
               <div className="flex justify-between items-start mb-4">
-                <div>
-                  <h1 className="text-3xl font-bold text-gray-900 mb-2">{service.title}</h1>
+                <div className="flex-1">
+                  <div className="flex items-start gap-3">
+                    <h1 className="text-3xl font-bold text-gray-900 mb-2 flex-1">{service.title}</h1>
+                    <button
+                      onClick={handleToggleFavorite}
+                      disabled={favLoading}
+                      title={isFavorited ? 'Remove from favorites' : 'Add to favorites'}
+                      className="mt-1 p-2 rounded-full border border-gray-200 hover:border-red-300 hover:bg-red-50 transition disabled:opacity-50"
+                    >
+                      <Heart
+                        size={22}
+                        className={isFavorited ? 'text-red-500 fill-current' : 'text-gray-400'}
+                      />
+                    </button>
+                  </div>
                   <div className="flex items-center gap-4 text-sm text-gray-500">
-                    <div className="flex items-center gap-1 text-yellow-500">
-                      <Star size={18} fill="currentColor" />
-                      <span className="font-bold text-gray-800 text-base">4.5</span>
-                      <span className="text-gray-400">(0 reviews)</span>
+                    <div className="flex items-center gap-2">
+                      <StarRating value={liveRating.avg} size={18} />
+                      {liveRating.avg > 0 ? (
+                        <span className="font-bold text-gray-800 text-base">{liveRating.avg}</span>
+                      ) : null}
+                      <span className="text-gray-400">({liveRating.count} {liveRating.count === 1 ? 'review' : 'reviews'})</span>
                     </div>
                     <div className="flex items-center gap-1">
                       <MapPin size={18} />
@@ -129,7 +188,7 @@ const ListingDetails = () => {
                   </p>
                   <p className="text-2xl font-bold text-indigo-600">
                     {service.pricing?.amount
-                      ? `$${service.pricing.amount} ${service.pricing.currency || ''}`
+                      ? `${service.pricing.currency || '$'}${service.pricing.amount}`
                       : 'Contact Us'}
                   </p>
                 </div>
@@ -250,6 +309,16 @@ const ListingDetails = () => {
             </div>
           </div>
         </div>
+
+        {/* Reviews Section */}
+        <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-8 mt-6">
+          <ReviewsSection
+            listingId={id}
+            providerId={service.providerId?._id || service.providerId}
+            onRatingUpdate={handleRatingUpdate}
+          />
+        </div>
+
       </div>
     </div>
   );

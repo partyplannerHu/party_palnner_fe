@@ -1,21 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import { MapPin, Star, Filter, ChevronLeft, ChevronRight } from 'lucide-react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { MapPin, Star, Filter, ChevronLeft, ChevronRight, Heart } from 'lucide-react';
 import { Link, useSearchParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import categoryService from '../services/categoryService';
 import subcategoryService from '../services/subcategoryService';
 import listingService from '../services/listingService';
+import favoriteService from '../services/favoriteService';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { handleApiError } from '../utils/errorHandler';
 import { getImageUrl } from '../utils/imageUrl';
+import { useAuth } from '../context/AuthContext';
 
 const BrowseServicesPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const { isAuthenticated } = useAuth();
 
   const [categories, setCategories] = useState([]);
   const [subcategories, setSubcategories] = useState([]);
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [favoritedIds, setFavoritedIds] = useState(new Set());
+  const [togglingId, setTogglingId] = useState(null);
 
   // Filter states
   const [selectedCategory, setSelectedCategory] = useState(searchParams.get('category') || 'All');
@@ -23,6 +29,7 @@ const BrowseServicesPage = () => {
   const [searchQuery, setSearchQuery] = useState(searchParams.get('search') || '');
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
+  const [topRated, setTopRated] = useState(false);
 
   // Pagination states
   const [currentPage, setCurrentPage] = useState(1);
@@ -102,6 +109,12 @@ const BrowseServicesPage = () => {
           params.maxPrice = parseFloat(maxPrice);
         }
 
+        // Sort by top rated
+        if (topRated) {
+          params.sortBy = 'averageRating';
+          params.order = 'desc';
+        }
+
         const response = await listingService.getListings(params);
 
         if (response.success) {
@@ -117,7 +130,49 @@ const BrowseServicesPage = () => {
     };
 
     fetchListings();
-  }, [selectedCategory, selectedSubcategory, searchQuery, currentPage, minPrice, maxPrice]);
+  }, [selectedCategory, selectedSubcategory, searchQuery, currentPage, minPrice, maxPrice, topRated]);
+
+  // Load user's favorited listing IDs when authenticated
+  useEffect(() => {
+    if (!isAuthenticated) {
+      setFavoritedIds(new Set());
+      return;
+    }
+    favoriteService.getFavorites()
+      .then(res => {
+        if (res.success) {
+          const ids = new Set(res.data.map(fav => fav.listingId?._id).filter(Boolean));
+          setFavoritedIds(ids);
+        }
+      })
+      .catch(() => {});
+  }, [isAuthenticated]);
+
+  const handleToggleFavorite = useCallback(async (e, listingId) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!isAuthenticated) {
+      toast.info('Please login to save favorites');
+      return;
+    }
+    setTogglingId(listingId);
+    try {
+      const res = await favoriteService.toggleFavorite(listingId);
+      if (res.success) {
+        setFavoritedIds(prev => {
+          const next = new Set(prev);
+          if (res.isFavorited) next.add(listingId);
+          else next.delete(listingId);
+          return next;
+        });
+        toast.success(res.message);
+      }
+    } catch (err) {
+      toast.error(handleApiError(err));
+    } finally {
+      setTogglingId(null);
+    }
+  }, [isAuthenticated]);
 
   const handleCategoryChange = (categoryId) => {
     setSelectedCategory(categoryId);
@@ -255,6 +310,23 @@ const BrowseServicesPage = () => {
                 </div>
               )}
 
+              {/* Top Rated Filter */}
+              <div className="mb-8">
+                <h3 className="font-semibold mb-4 text-gray-800">Sort By</h3>
+                <label className="flex items-center gap-3 cursor-pointer group">
+                  <div
+                    onClick={() => { setTopRated(prev => !prev); setCurrentPage(1); }}
+                    className={`relative w-10 h-5 rounded-full transition-colors duration-200 ${topRated ? 'bg-indigo-600' : 'bg-gray-200'}`}
+                  >
+                    <span className={`absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform duration-200 ${topRated ? 'translate-x-5' : 'translate-x-0'}`} />
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <Star size={15} className="text-yellow-400 fill-current" />
+                    <span className="text-gray-600 group-hover:text-indigo-600 transition text-sm">Top Rated</span>
+                  </div>
+                </label>
+              </div>
+
               {/* فلتر السعر */}
               <div>
                 <h3 className="font-semibold mb-4 text-gray-800">Price Range</h3>
@@ -300,10 +372,23 @@ const BrowseServicesPage = () => {
                           alt={item.title}
                           className="w-full h-full object-cover hover:scale-105 transition duration-500"
                         />
-                        <div className="absolute top-3 right-3 bg-white px-2 py-1 rounded-md text-xs font-bold shadow-sm flex items-center gap-1">
-                          <Star size={12} className="text-yellow-500 fill-current" />
-                          4.5
-                        </div>
+                        {item.averageRating > 0 && (
+                          <div className="absolute top-3 right-3 bg-white px-2 py-1 rounded-md text-xs font-bold shadow-sm flex items-center gap-1">
+                            <Star size={12} className="text-yellow-500 fill-current" />
+                            {item.averageRating}
+                          </div>
+                        )}
+                        <button
+                          onClick={(e) => handleToggleFavorite(e, item._id)}
+                          disabled={togglingId === item._id}
+                          className="absolute top-3 left-3 bg-white/90 p-2 rounded-full shadow-sm hover:scale-110 transition disabled:opacity-50"
+                          title={favoritedIds.has(item._id) ? 'Remove from favorites' : 'Add to favorites'}
+                        >
+                          <Heart
+                            size={16}
+                            className={favoritedIds.has(item._id) ? 'text-red-500 fill-current' : 'text-gray-400'}
+                          />
+                        </button>
                       </div>
 
                       {/* المحتوى */}
@@ -323,7 +408,7 @@ const BrowseServicesPage = () => {
                         <div className="border-t border-gray-100 pt-4 flex justify-between items-center">
                           <div className="font-bold text-xl text-gray-900">
                             {item.pricing?.amount ? (
-                              `$${item.pricing.amount}`
+                              `${item.pricing?.currency || '$'}${item.pricing.amount}`
                             ) : (
                               <span className="text-sm text-indigo-600">Contact Us</span>
                             )}

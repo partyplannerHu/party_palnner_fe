@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { MapPin, Star } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { MapPin, Star, Search } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import categoryService from '../services/categoryService';
 import listingService from '../services/listingService';
@@ -14,6 +14,11 @@ const HomePage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [suggestions, setSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [suggestionsLoading, setSuggestionsLoading] = useState(false);
+  const searchRef = useRef(null);
+  const debounceRef = useRef(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,14 +49,60 @@ const HomePage = () => {
     fetchData();
   }, []);
 
+  // Fetch suggestions with debounce
+  useEffect(() => {
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+
+    if (!searchQuery.trim() || searchQuery.trim().length < 2) {
+      setSuggestions([]);
+      setShowSuggestions(false);
+      return;
+    }
+
+    debounceRef.current = setTimeout(async () => {
+      try {
+        setSuggestionsLoading(true);
+        const res = await listingService.getListings({ search: searchQuery.trim(), limit: 6, isActive: true });
+        if (res.success) {
+          setSuggestions(res.data || []);
+          setShowSuggestions(true);
+        }
+      } catch {
+        setSuggestions([]);
+      } finally {
+        setSuggestionsLoading(false);
+      }
+    }, 300);
+
+    return () => clearTimeout(debounceRef.current);
+  }, [searchQuery]);
+
+  // Close suggestions on outside click
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (searchRef.current && !searchRef.current.contains(e.target)) {
+        setShowSuggestions(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   // Handle search form submission
   const handleSearch = (e) => {
     e.preventDefault();
+    setShowSuggestions(false);
     if (searchQuery.trim()) {
       navigate(`/services?search=${encodeURIComponent(searchQuery.trim())}`);
     } else {
       navigate('/services');
     }
+  };
+
+  const handleSuggestionClick = (listing) => {
+    setShowSuggestions(false);
+    setSearchQuery('');
+    navigate(`/service/${listing._id}`);
   };
 
   if (loading) {
@@ -87,19 +138,68 @@ const HomePage = () => {
         </p>
         
         {/* مربع البحث */}
-        <div className="max-w-2xl mx-auto px-4">
+        <div className="max-w-2xl mx-auto px-4 relative" ref={searchRef}>
           <form onSubmit={handleSearch} className="bg-white rounded-full p-2 flex shadow-lg">
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
+              onFocus={() => suggestions.length > 0 && setShowSuggestions(true)}
               placeholder="Search for venues, photographers, caterers..."
               className="flex-1 px-6 py-3 rounded-full outline-none text-gray-700"
+              autoComplete="off"
             />
             <button type="submit" className="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-700 transition">
               Search
             </button>
           </form>
+
+          {/* Suggestions dropdown */}
+          {showSuggestions && (
+            <div className="absolute left-0 right-0 mt-2 mx-4 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden z-50">
+              {suggestionsLoading ? (
+                <div className="px-6 py-4 text-gray-400 text-sm text-center">Searching...</div>
+              ) : suggestions.length === 0 ? (
+                <div className="px-6 py-4 text-gray-400 text-sm text-center">No results found</div>
+              ) : (
+                <>
+                  {suggestions.map((item) => (
+                    <button
+                      key={item._id}
+                      type="button"
+                      onClick={() => handleSuggestionClick(item)}
+                      className="w-full flex items-center gap-4 px-5 py-3 hover:bg-blue-50 transition text-left"
+                    >
+                      <div className="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0 bg-gray-100">
+                        <img
+                          src={getImageUrl(item.images?.[0])}
+                          alt={item.title}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-semibold text-gray-800 truncate">{item.title}</p>
+                        <p className="text-xs text-gray-400 truncate">
+                          {item.categoryId?.name} {item.location?.city ? `· ${item.location.city}` : ''}
+                        </p>
+                      </div>
+                      <div className="text-sm font-bold text-blue-600 flex-shrink-0">
+                        {item.pricing?.amount ? `${item.pricing?.currency || '$'}${item.pricing.amount}` : ''}
+                      </div>
+                    </button>
+                  ))}
+                  <button
+                    type="button"
+                    onClick={handleSearch}
+                    className="w-full flex items-center gap-2 px-5 py-3 bg-gray-50 hover:bg-gray-100 transition text-sm text-blue-600 font-medium border-t border-gray-100"
+                  >
+                    <Search size={14} />
+                    See all results for "{searchQuery}"
+                  </button>
+                </>
+              )}
+            </div>
+          )}
         </div>
       </div>
 
@@ -179,7 +279,7 @@ const HomePage = () => {
                       <div>
                         <p className="text-xs text-gray-400">Starting from</p>
                         <p className="text-xl font-bold text-blue-600">
-                          {item.pricing?.amount ? `$${item.pricing.amount}` : 'Contact Us'}
+                          {item.pricing?.amount ? `${item.pricing?.currency || '$'}${item.pricing.amount}` : 'Contact Us'}
                         </p>
                       </div>
                       <Link to={`/service/${item._id}`} className="bg-blue-50 text-blue-600 px-5 py-2 rounded-lg text-sm font-semibold hover:bg-blue-600 hover:text-white transition">

@@ -1,0 +1,847 @@
+
+> party-planner-v2@0.1.0 start
+> react-scripts start
+
+Browserslist: browsers data (caniuse-lite) is 6 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+(node:33232) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:33232) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+Starting the development server...
+
+Compiled successfully!
+
+You can now view party-planner-v2 in the browser.
+
+  Local:            http://localhost:3001
+  On Your Network:  http://192.168.1.18:3001
+
+Note that the development build is not optimized.
+To create a production build, use npm run build.
+
+webpack compiled [1m[32msuccessfully[39m[22m
+Compiling...
+Compiled successfully!
+webpack compiled [1m[32msuccessfully[39m[22m
+Compiling...
+Compiled successfully!
+webpack compiled [1m[32msuccessfully[39m[22m
+Compiling...
+Compiled successfully!
+webpack compiled [1m[32msuccessfully[39m[22m
+Compiling...
+Compiled successfully!
+webpack compiled [1m[32msuccessfully[39m[22m
+Compiling...
+Compiled successfully!
+webpack compiled [1m[32msuccessfully[39m[22m
+Compiling...
+Compiled successfully!
+webpack compiled [1m[32msuccessfully[39m[22m
+Compiling...
+Compiled successfully!
+webpack compiled [1m[32msuccessfully[39m[22m
+Compiling...
+Compiled successfully!
+webpack compiled [1m[32msuccessfully[39m[22m
+Compiling...
+Compiled successfully!
+webpack compiled [1m[32msuccessfully[39m[22m
+Compiling...
+Compiled successfully!
+webpack compiled [1m[32msuccessfully[39m[22m
+Compiling...
+Compiled successfully!
+webpack compiled [1m[32msuccessfully[39m[22m
+Compiling...
+Compiled successfully!
+webpack compiled [1m[32msuccessfully[39m[22m
+Compiling...
+Compiled successfully!
+webpack compiled [1m[32msuccessfully[39m[22m
+Compiling...
+Compiled successfully!
+webpack compiled [1m[32msuccessfully[39m[22m
+Compiling...
+Compiled successfully!
+webpack compiled [1m[32msuccessfully[39m[22m
+Compiling...
+Compiled successfully!
+webpack compiled [1m[32msuccessfully[39m[22m
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+[1m[33mWARNING[39m[22m in [1m[eslint] 
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+[39m[22m
+
+webpack compiled with [1m[33m1 warning[39m[22m
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+[1m[33mWARNING[39m[22m in [1m[eslint] 
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+[39m[22m
+
+webpack compiled with [1m[33m1 warning[39m[22m
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+[1m[33mWARNING[39m[22m in [1m[eslint] 
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+[39m[22m
+
+webpack compiled with [1m[33m1 warning[39m[22m
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+[1m[33mWARNING[39m[22m in [1m[eslint] 
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+[39m[22m
+
+webpack compiled with [1m[33m1 warning[39m[22m
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+  Line 32:10:  'topRated' is assigned a value but never used         no-unused-vars
+  Line 32:20:  'setTopRated' is assigned a value but never used      no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+[1m[33mWARNING[39m[22m in [1m[eslint] 
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+  Line 32:10:  'topRated' is assigned a value but never used         no-unused-vars
+  Line 32:20:  'setTopRated' is assigned a value but never used      no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+[39m[22m
+
+webpack compiled with [1m[33m1 warning[39m[22m
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used                                                         no-unused-vars
+  Line 32:20:  'setTopRated' is assigned a value but never used                                                             no-unused-vars
+  Line 133:6:  React Hook useEffect has a missing dependency: 'topRated'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+[1m[33mWARNING[39m[22m in [1m[eslint] 
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used                                                         no-unused-vars
+  Line 32:20:  'setTopRated' is assigned a value but never used                                                             no-unused-vars
+  Line 133:6:  React Hook useEffect has a missing dependency: 'topRated'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+[39m[22m
+
+webpack compiled with [1m[33m1 warning[39m[22m
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+  Line 32:20:  'setTopRated' is assigned a value but never used      no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+[1m[33mWARNING[39m[22m in [1m[eslint] 
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+  Line 32:20:  'setTopRated' is assigned a value but never used      no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+[39m[22m
+
+webpack compiled with [1m[33m1 warning[39m[22m
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+[1m[33mWARNING[39m[22m in [1m[eslint] 
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+[39m[22m
+
+webpack compiled with [1m[33m1 warning[39m[22m
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+[1m[33mWARNING[39m[22m in [1m[eslint] 
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+[39m[22m
+
+webpack compiled with [1m[33m1 warning[39m[22m
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+[1m[33mWARNING[39m[22m in [1m[eslint] 
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+[39m[22m
+
+webpack compiled with [1m[33m1 warning[39m[22m
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+[1m[33mWARNING[39m[22m in [1m[eslint] 
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+[39m[22m
+
+webpack compiled with [1m[33m1 warning[39m[22m
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+[1m[33mWARNING[39m[22m in [1m[eslint] 
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+[39m[22m
+
+webpack compiled with [1m[33m1 warning[39m[22m
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+[1m[33mWARNING[39m[22m in [1m[eslint] 
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+[39m[22m
+
+webpack compiled with [1m[33m1 warning[39m[22m
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+[1m[33mWARNING[39m[22m in [1m[eslint] 
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+[39m[22m
+
+webpack compiled with [1m[33m1 warning[39m[22m
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+[1m[33mWARNING[39m[22m in [1m[eslint] 
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+[39m[22m
+
+webpack compiled with [1m[33m1 warning[39m[22m
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src\App.js
+  Line 17:8:  'AdminDashboard' is defined but never used     no-unused-vars
+  Line 18:8:  'AdminUsersPage' is defined but never used     no-unused-vars
+  Line 19:8:  'AdminListingsPage' is defined but never used  no-unused-vars
+  Line 20:8:  'AdminReviewsPage' is defined but never used   no-unused-vars
+
+src\pages\AdminUsersPage.js
+  Line 14:7:  'RoleBadge' is assigned a value but never used  no-unused-vars
+
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+[1m[33mWARNING[39m[22m in [1m[eslint] 
+src\App.js
+  Line 17:8:  'AdminDashboard' is defined but never used     no-unused-vars
+  Line 18:8:  'AdminUsersPage' is defined but never used     no-unused-vars
+  Line 19:8:  'AdminListingsPage' is defined but never used  no-unused-vars
+  Line 20:8:  'AdminReviewsPage' is defined but never used   no-unused-vars
+
+src\pages\AdminUsersPage.js
+  Line 14:7:  'RoleBadge' is assigned a value but never used  no-unused-vars
+
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+[39m[22m
+
+webpack compiled with [1m[33m1 warning[39m[22m
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src\pages\AdminUsersPage.js
+  Line 14:7:  'RoleBadge' is assigned a value but never used  no-unused-vars
+
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+[1m[33mWARNING[39m[22m in [1m[eslint] 
+src\pages\AdminUsersPage.js
+  Line 14:7:  'RoleBadge' is assigned a value but never used  no-unused-vars
+
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+[39m[22m
+
+webpack compiled with [1m[33m1 warning[39m[22m
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src\pages\AdminUsersPage.js
+  Line 14:7:  'RoleBadge' is assigned a value but never used  no-unused-vars
+
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+[1m[33mWARNING[39m[22m in [1m[eslint] 
+src\pages\AdminUsersPage.js
+  Line 14:7:  'RoleBadge' is assigned a value but never used  no-unused-vars
+
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+[39m[22m
+
+webpack compiled with [1m[33m1 warning[39m[22m
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src\pages\AdminUsersPage.js
+  Line 14:7:  'RoleBadge' is assigned a value but never used  no-unused-vars
+
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+[1m[33mWARNING[39m[22m in [1m[eslint] 
+src\pages\AdminUsersPage.js
+  Line 14:7:  'RoleBadge' is assigned a value but never used  no-unused-vars
+
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+[39m[22m
+
+webpack compiled with [1m[33m1 warning[39m[22m
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src\pages\AdminUsersPage.js
+  Line 14:7:  'RoleBadge' is assigned a value but never used  no-unused-vars
+
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src\pages\HomePage.js
+  Line 2:24:   'Search' is defined but never used                          no-unused-vars
+  Line 17:10:  'suggestions' is assigned a value but never used            no-unused-vars
+  Line 17:23:  'setSuggestions' is assigned a value but never used         no-unused-vars
+  Line 18:10:  'showSuggestions' is assigned a value but never used        no-unused-vars
+  Line 18:27:  'setShowSuggestions' is assigned a value but never used     no-unused-vars
+  Line 19:10:  'suggestionsLoading' is assigned a value but never used     no-unused-vars
+  Line 19:30:  'setSuggestionsLoading' is assigned a value but never used  no-unused-vars
+  Line 20:9:   'searchRef' is assigned a value but never used              no-unused-vars
+  Line 21:9:   'debounceRef' is assigned a value but never used            no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+[1m[33mWARNING[39m[22m in [1m[eslint] 
+src\pages\AdminUsersPage.js
+  Line 14:7:  'RoleBadge' is assigned a value but never used  no-unused-vars
+
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src\pages\HomePage.js
+  Line 2:24:   'Search' is defined but never used                          no-unused-vars
+  Line 17:10:  'suggestions' is assigned a value but never used            no-unused-vars
+  Line 17:23:  'setSuggestions' is assigned a value but never used         no-unused-vars
+  Line 18:10:  'showSuggestions' is assigned a value but never used        no-unused-vars
+  Line 18:27:  'setShowSuggestions' is assigned a value but never used     no-unused-vars
+  Line 19:10:  'suggestionsLoading' is assigned a value but never used     no-unused-vars
+  Line 19:30:  'setSuggestionsLoading' is assigned a value but never used  no-unused-vars
+  Line 20:9:   'searchRef' is assigned a value but never used              no-unused-vars
+  Line 21:9:   'debounceRef' is assigned a value but never used            no-unused-vars
+
+[39m[22m
+
+webpack compiled with [1m[33m1 warning[39m[22m
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src\pages\AdminUsersPage.js
+  Line 14:7:  'RoleBadge' is assigned a value but never used  no-unused-vars
+
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src\pages\HomePage.js
+  Line 2:24:   'Search' is defined but never used                          no-unused-vars
+  Line 17:10:  'suggestions' is assigned a value but never used            no-unused-vars
+  Line 17:23:  'setSuggestions' is assigned a value but never used         no-unused-vars
+  Line 18:10:  'showSuggestions' is assigned a value but never used        no-unused-vars
+  Line 18:27:  'setShowSuggestions' is assigned a value but never used     no-unused-vars
+  Line 19:10:  'suggestionsLoading' is assigned a value but never used     no-unused-vars
+  Line 19:30:  'setSuggestionsLoading' is assigned a value but never used  no-unused-vars
+  Line 20:9:   'searchRef' is assigned a value but never used              no-unused-vars
+  Line 21:9:   'debounceRef' is assigned a value but never used            no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+[1m[33mWARNING[39m[22m in [1m[eslint] 
+src\pages\AdminUsersPage.js
+  Line 14:7:  'RoleBadge' is assigned a value but never used  no-unused-vars
+
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src\pages\HomePage.js
+  Line 2:24:   'Search' is defined but never used                          no-unused-vars
+  Line 17:10:  'suggestions' is assigned a value but never used            no-unused-vars
+  Line 17:23:  'setSuggestions' is assigned a value but never used         no-unused-vars
+  Line 18:10:  'showSuggestions' is assigned a value but never used        no-unused-vars
+  Line 18:27:  'setShowSuggestions' is assigned a value but never used     no-unused-vars
+  Line 19:10:  'suggestionsLoading' is assigned a value but never used     no-unused-vars
+  Line 19:30:  'setSuggestionsLoading' is assigned a value but never used  no-unused-vars
+  Line 20:9:   'searchRef' is assigned a value but never used              no-unused-vars
+  Line 21:9:   'debounceRef' is assigned a value but never used            no-unused-vars
+
+[39m[22m
+
+webpack compiled with [1m[33m1 warning[39m[22m
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src\pages\AdminUsersPage.js
+  Line 14:7:  'RoleBadge' is assigned a value but never used  no-unused-vars
+
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src\pages\HomePage.js
+  Line 2:24:   'Search' is defined but never used                       no-unused-vars
+  Line 17:10:  'suggestions' is assigned a value but never used         no-unused-vars
+  Line 18:10:  'showSuggestions' is assigned a value but never used     no-unused-vars
+  Line 19:10:  'suggestionsLoading' is assigned a value but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+[1m[33mWARNING[39m[22m in [1m[eslint] 
+src\pages\AdminUsersPage.js
+  Line 14:7:  'RoleBadge' is assigned a value but never used  no-unused-vars
+
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src\pages\HomePage.js
+  Line 2:24:   'Search' is defined but never used                       no-unused-vars
+  Line 17:10:  'suggestions' is assigned a value but never used         no-unused-vars
+  Line 18:10:  'showSuggestions' is assigned a value but never used     no-unused-vars
+  Line 19:10:  'suggestionsLoading' is assigned a value but never used  no-unused-vars
+
+[39m[22m
+
+webpack compiled with [1m[33m1 warning[39m[22m
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src\pages\AdminUsersPage.js
+  Line 14:7:  'RoleBadge' is assigned a value but never used  no-unused-vars
+
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src\pages\HomePage.js
+  Line 2:24:   'Search' is defined but never used                       no-unused-vars
+  Line 17:10:  'suggestions' is assigned a value but never used         no-unused-vars
+  Line 18:10:  'showSuggestions' is assigned a value but never used     no-unused-vars
+  Line 19:10:  'suggestionsLoading' is assigned a value but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+[1m[33mWARNING[39m[22m in [1m[eslint] 
+src\pages\AdminUsersPage.js
+  Line 14:7:  'RoleBadge' is assigned a value but never used  no-unused-vars
+
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src\pages\HomePage.js
+  Line 2:24:   'Search' is defined but never used                       no-unused-vars
+  Line 17:10:  'suggestions' is assigned a value but never used         no-unused-vars
+  Line 18:10:  'showSuggestions' is assigned a value but never used     no-unused-vars
+  Line 19:10:  'suggestionsLoading' is assigned a value but never used  no-unused-vars
+
+[39m[22m
+
+webpack compiled with [1m[33m1 warning[39m[22m
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src\pages\AdminUsersPage.js
+  Line 14:7:  'RoleBadge' is assigned a value but never used  no-unused-vars
+
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src\pages\HomePage.js
+  Line 2:24:   'Search' is defined but never used                          no-unused-vars
+  Line 17:10:  'suggestions' is assigned a value but never used            no-unused-vars
+  Line 18:10:  'showSuggestions' is assigned a value but never used        no-unused-vars
+  Line 19:10:  'suggestionsLoading' is assigned a value but never used     no-unused-vars
+  Line 102:9:  'handleSuggestionClick' is assigned a value but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+[1m[33mWARNING[39m[22m in [1m[eslint] 
+src\pages\AdminUsersPage.js
+  Line 14:7:  'RoleBadge' is assigned a value but never used  no-unused-vars
+
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src\pages\HomePage.js
+  Line 2:24:   'Search' is defined but never used                          no-unused-vars
+  Line 17:10:  'suggestions' is assigned a value but never used            no-unused-vars
+  Line 18:10:  'showSuggestions' is assigned a value but never used        no-unused-vars
+  Line 19:10:  'suggestionsLoading' is assigned a value but never used     no-unused-vars
+  Line 102:9:  'handleSuggestionClick' is assigned a value but never used  no-unused-vars
+
+[39m[22m
+
+webpack compiled with [1m[33m1 warning[39m[22m
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src\pages\AdminUsersPage.js
+  Line 14:7:  'RoleBadge' is assigned a value but never used  no-unused-vars
+
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src\pages\HomePage.js
+  Line 2:24:   'Search' is defined but never used                          no-unused-vars
+  Line 17:10:  'suggestions' is assigned a value but never used            no-unused-vars
+  Line 18:10:  'showSuggestions' is assigned a value but never used        no-unused-vars
+  Line 19:10:  'suggestionsLoading' is assigned a value but never used     no-unused-vars
+  Line 102:9:  'handleSuggestionClick' is assigned a value but never used  no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+[1m[33mWARNING[39m[22m in [1m[eslint] 
+src\pages\AdminUsersPage.js
+  Line 14:7:  'RoleBadge' is assigned a value but never used  no-unused-vars
+
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src\pages\HomePage.js
+  Line 2:24:   'Search' is defined but never used                          no-unused-vars
+  Line 17:10:  'suggestions' is assigned a value but never used            no-unused-vars
+  Line 18:10:  'showSuggestions' is assigned a value but never used        no-unused-vars
+  Line 19:10:  'suggestionsLoading' is assigned a value but never used     no-unused-vars
+  Line 102:9:  'handleSuggestionClick' is assigned a value but never used  no-unused-vars
+
+[39m[22m
+
+webpack compiled with [1m[33m1 warning[39m[22m
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src\pages\AdminUsersPage.js
+  Line 14:7:  'RoleBadge' is assigned a value but never used  no-unused-vars
+
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+[1m[33mWARNING[39m[22m in [1m[eslint] 
+src\pages\AdminUsersPage.js
+  Line 14:7:  'RoleBadge' is assigned a value but never used  no-unused-vars
+
+src\pages\BrowseServicesPage.js
+  Line 15:24:  'setSearchParams' is assigned a value but never used  no-unused-vars
+
+src\pages\FavoritesPage.js
+  Line 18:6:  React Hook useEffect has a missing dependency: 'fetchFavorites'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+[39m[22m
+
+webpack compiled with [1m[33m1 warning[39m[22m

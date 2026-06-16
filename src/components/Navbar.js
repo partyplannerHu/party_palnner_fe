@@ -38,8 +38,9 @@ const Navbar = () => {
 
               {/* Admin Panel - للأدمن فقط */}
               {user?.role === 'admin' && (
-                <Link to="/admin/categories" className="text-gray-500 hover:text-indigo-600 transition" title="Admin Panel">
+                <Link to="/admin" className="flex items-center gap-1.5 text-gray-500 hover:text-indigo-600 transition font-medium text-sm" title="Admin Panel">
                   <Shield size={20} />
+                  <span className="hidden lg:inline">Admin</span>
                 </Link>
               )}
 

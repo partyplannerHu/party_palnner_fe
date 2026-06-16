@@ -1,12 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Upload, DollarSign, MapPin, Phone, Type, Image as ImageIcon, X, Loader2, Plus, Mail } from 'lucide-react';
+import { Upload, DollarSign, MapPin, Phone, Type, Image as ImageIcon, X, Loader2, Plus, Mail, ChevronDown } from 'lucide-react';
 import { toast } from 'react-toastify';
 import categoryService from '../services/categoryService';
 import subcategoryService from '../services/subcategoryService';
 import listingService from '../services/listingService';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { handleApiError } from '../utils/errorHandler';
+
+const JORDAN_CITIES = [
+  'Amman', 'Zarqa', 'Irbid', 'Russeifa', 'Wadi as-Seer', 'Aqaba',
+  'Madaba', 'Salt', 'Mafraq', 'Jerash', 'Ajloun', 'Karak',
+  'Tafilah', "Ma'an", 'Ramtha', 'Sahab', 'Azraq', 'Petra',
+  'Shobak', 'Dhiban', 'Al-Quwayrah',
+];
+
+const AMMAN_AREAS = [
+  'Abdoun', 'Sweifieh', 'Khalda', 'Dabouq', 'Medina Street',
+  'Shmeisani', 'Jabal Amman', 'Jabal Hussein', 'Jabal Al-Weibdeh',
+  'Downtown (Al-Balad)', 'Tla Al-Ali', 'Al-Rabiyeh', 'Marj Al-Hamam',
+  'Bayader Wadi Seer', 'Al-Quweismeh', 'Naour', 'Al-Jubeha',
+  'Al-Hashmi Al-Shamali', 'Al-Hashmi Al-Janoobi', 'Sahab',
+  'Airport Road', 'Marka', 'Zarqa Road', 'Sports City',
+  'Al-Yarmouk', 'Al-Nuzha', 'Ras Al-Ain', 'Al-Muqabalain',
+  'Um Summaq', 'Arjan', 'Al-Swaqa',
+];
 
 const AddListingPage = () => {
   const navigate = useNavigate();
@@ -70,26 +88,28 @@ const AddListingPage = () => {
   }, []);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   // Handle category change - fetch subcategories
   const handleCategoryChange = async (e) => {
     const categoryId = e.target.value;
-    setFormData({ ...formData, categoryId, subcategoryId: '' });
+    setFormData(prev => ({ ...prev, categoryId, subcategoryId: '' }));
+    setAvailableSubcategories([]);
 
     if (categoryId) {
       try {
         const response = await subcategoryService.getSubcategoriesByCategory(categoryId);
         if (response.success) {
           setAvailableSubcategories(response.data);
+        } else {
+          toast.error('Failed to load subcategories');
         }
       } catch (err) {
         console.error('Error fetching subcategories:', err);
-        setAvailableSubcategories([]);
+        toast.error('Failed to load subcategories');
       }
-    } else {
-      setAvailableSubcategories([]);
     }
   };
 
@@ -147,27 +167,27 @@ const AddListingPage = () => {
   // Add feature tag
   const addFeature = () => {
     if (featureInput.trim() && !formData.features.includes(featureInput.trim())) {
-      setFormData({ ...formData, features: [...formData.features, featureInput.trim()] });
+      setFormData(prev => ({ ...prev, features: [...prev.features, featureInput.trim()] }));
       setFeatureInput('');
     }
   };
 
   // Remove feature tag
   const removeFeature = (feature) => {
-    setFormData({ ...formData, features: formData.features.filter(f => f !== feature) });
+    setFormData(prev => ({ ...prev, features: prev.features.filter(f => f !== feature) }));
   };
 
   // Add amenity tag
   const addAmenity = () => {
     if (amenityInput.trim() && !formData.amenities.includes(amenityInput.trim())) {
-      setFormData({ ...formData, amenities: [...formData.amenities, amenityInput.trim()] });
+      setFormData(prev => ({ ...prev, amenities: [...prev.amenities, amenityInput.trim()] }));
       setAmenityInput('');
     }
   };
 
   // Remove amenity tag
   const removeAmenity = (amenity) => {
-    setFormData({ ...formData, amenities: formData.amenities.filter(a => a !== amenity) });
+    setFormData(prev => ({ ...prev, amenities: prev.amenities.filter(a => a !== amenity) }));
   };
 
   // Handle form submission
@@ -377,29 +397,59 @@ const AddListingPage = () => {
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                       <MapPin className="h-5 w-5 text-gray-400" />
                     </div>
-                    <input
-                      type="text"
+                    <select
                       name="city"
                       required
                       value={formData.city}
-                      className="pl-10 block w-full border-gray-300 rounded-lg border focus:ring-indigo-500 focus:border-indigo-500 p-3 outline-none"
-                      placeholder="e.g., Amman"
-                      onChange={handleChange}
-                    />
+                      onChange={(e) => {
+                        setFormData(prev => ({ ...prev, city: e.target.value, area: '' }));
+                      }}
+                      className="pl-10 pr-10 block w-full border-gray-300 rounded-lg border focus:ring-indigo-500 focus:border-indigo-500 p-3 outline-none bg-white appearance-none"
+                    >
+                      <option value="">Select City</option>
+                      {JORDAN_CITIES.map((c) => (
+                        <option key={c} value={c}>{c}</option>
+                      ))}
+                    </select>
+                    <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                      <ChevronDown className="h-5 w-5 text-gray-400" />
+                    </div>
                   </div>
                 </div>
 
-                {/* Area */}
+                {/* Area — dropdown when Amman, free text otherwise */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Area</label>
-                  <input
-                    type="text"
-                    name="area"
-                    value={formData.area}
-                    className="block w-full border-gray-300 rounded-lg border focus:ring-indigo-500 focus:border-indigo-500 p-3 outline-none"
-                    placeholder="e.g., Abdoun"
-                    onChange={handleChange}
-                  />
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Area {formData.city === 'Amman' ? '*' : '(optional)'}
+                  </label>
+                  {formData.city === 'Amman' ? (
+                    <div className="relative">
+                      <select
+                        name="area"
+                        required
+                        value={formData.area}
+                        onChange={handleChange}
+                        className="pr-10 block w-full border-gray-300 rounded-lg border focus:ring-indigo-500 focus:border-indigo-500 p-3 outline-none bg-white appearance-none"
+                      >
+                        <option value="">Select Area in Amman</option>
+                        {AMMAN_AREAS.map((a) => (
+                          <option key={a} value={a}>{a}</option>
+                        ))}
+                      </select>
+                      <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                        <ChevronDown className="h-5 w-5 text-gray-400" />
+                      </div>
+                    </div>
+                  ) : (
+                    <input
+                      type="text"
+                      name="area"
+                      value={formData.area}
+                      className="block w-full border-gray-300 rounded-lg border focus:ring-indigo-500 focus:border-indigo-500 p-3 outline-none"
+                      placeholder="e.g., City center"
+                      onChange={handleChange}
+                    />
+                  )}
                 </div>
 
                 {/* Address */}

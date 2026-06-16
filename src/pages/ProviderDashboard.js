@@ -131,7 +131,7 @@ const ProviderDashboard = () => {
                   {/* Price */}
                   <div className="mb-4">
                     <p className="text-lg font-bold text-gray-900">
-                      {item.pricing?.amount ? `$${item.pricing.amount}` : 'Contact'}
+                      {item.pricing?.amount ? `${item.pricing?.currency || '$'}${item.pricing.amount}` : 'Contact'}
                     </p>
                   </div>
 

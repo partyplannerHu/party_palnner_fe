@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { User, Mail, Phone, MapPin, Camera, Save, Lock, Loader2, Building2 } from 'lucide-react';
+import { User, Mail, Phone, MapPin, Camera, Save, Lock, Loader2, Building2, ChevronDown } from 'lucide-react';
 import { toast } from 'react-toastify';
 import { useAuth } from '../context/AuthContext';
 import userService from '../services/userService';
@@ -294,13 +294,38 @@ const UserProfilePage = () => {
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                       <MapPin className="h-5 w-5 text-gray-400" />
                     </div>
-                    <input
-                      type="text"
+                    <select
                       name="city"
                       value={profile.city}
                       onChange={handleChange}
-                      className="pl-10 block w-full border-gray-300 rounded-lg border focus:ring-indigo-500 focus:border-indigo-500 p-2.5 outline-none"
-                    />
+                      className="pl-10 pr-10 block w-full border-gray-300 rounded-lg border focus:ring-indigo-500 focus:border-indigo-500 p-2.5 outline-none bg-white appearance-none"
+                    >
+                      <option value="">Select a city</option>
+                      <option value="Amman">Amman</option>
+                      <option value="Zarqa">Zarqa</option>
+                      <option value="Irbid">Irbid</option>
+                      <option value="Russeifa">Russeifa</option>
+                      <option value="Wadi as-Seer">Wadi as-Seer</option>
+                      <option value="Aqaba">Aqaba</option>
+                      <option value="Madaba">Madaba</option>
+                      <option value="Salt">Salt</option>
+                      <option value="Mafraq">Mafraq</option>
+                      <option value="Jerash">Jerash</option>
+                      <option value="Ajloun">Ajloun</option>
+                      <option value="Karak">Karak</option>
+                      <option value="Tafilah">Tafilah</option>
+                      <option value="Ma'an">Ma'an</option>
+                      <option value="Ramtha">Ramtha</option>
+                      <option value="Sahab">Sahab</option>
+                      <option value="Azraq">Azraq</option>
+                      <option value="Petra">Petra</option>
+                      <option value="Shobak">Shobak</option>
+                      <option value="Dhiban">Dhiban</option>
+                      <option value="Al-Quwayrah">Al-Quwayrah</option>
+                    </select>
+                    <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                      <ChevronDown className="h-5 w-5 text-gray-400" />
+                    </div>
                   </div>
                 </div>
               </div>

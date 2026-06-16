@@ -14,10 +14,15 @@ import RegisterPage from './pages/RegisterPage';
 import AddListingPage from './pages/AddListingPage';
 import EditListingPage from './pages/EditListingPage';
 import ProviderDashboard from './pages/ProviderDashboard';
+import AdminDashboard from './pages/AdminDashboard';
+import AdminUsersPage from './pages/AdminUsersPage';
+import AdminListingsPage from './pages/AdminListingsPage';
+import AdminReviewsPage from './pages/AdminReviewsPage';
 import AdminCategoryPage from './pages/AdminCategoryPage';
 import AdminSubcategoryPage from './pages/AdminSubcategoryPage';
 import UserProfilePage from './pages/UserProfilePage';
 import FavoritesPage from './pages/FavoritesPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
   return (
@@ -74,7 +79,39 @@ function App() {
               }
             />
 
-            {/* Protected route - Admin only */}
+            {/* Protected routes - Admin only */}
+            <Route
+              path="/admin"
+              element={
+                <ProtectedRoute allowedRoles={['admin']}>
+                  <AdminDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/users"
+              element={
+                <ProtectedRoute allowedRoles={['admin']}>
+                  <AdminUsersPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/listings"
+              element={
+                <ProtectedRoute allowedRoles={['admin']}>
+                  <AdminListingsPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/reviews"
+              element={
+                <ProtectedRoute allowedRoles={['admin']}>
+                  <AdminReviewsPage />
+                </ProtectedRoute>
+              }
+            />
             <Route
               path="/admin/categories"
               element={
@@ -103,6 +140,9 @@ function App() {
             />
 
             <Route path="/favorites" element={<FavoritesPage />} />
+
+            {/* 404 catch-all */}
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </div>
       </Router>
