@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { MapPin, Star, Trash2, Heart } from 'lucide-react';
 import { toast } from 'react-toastify';
@@ -12,12 +12,7 @@ const FavoritesPage = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  // Fetch favorites on component mount
-  useEffect(() => {
-    fetchFavorites();
-  }, []);
-
-  const fetchFavorites = async () => {
+  const fetchFavorites = useCallback(async () => {
     try {
       setLoading(true);
       const response = await favoriteService.getFavorites();
@@ -38,7 +33,11 @@ const FavoritesPage = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [navigate]);
+
+  useEffect(() => {
+    fetchFavorites();
+  }, [fetchFavorites]);
 
   const removeFavorite = async (listingId) => {
     if (window.confirm("Remove this item from favorites?")) {

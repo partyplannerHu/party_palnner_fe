@@ -5,18 +5,6 @@ import AdminLayout from '../components/AdminLayout';
 import adminService from '../services/adminService';
 import { useAuth } from '../context/AuthContext';
 
-const ROLE_COLORS = {
-  admin: 'bg-red-100 text-red-700',
-  provider: 'bg-purple-100 text-purple-700',
-  customer: 'bg-blue-100 text-blue-700',
-};
-
-const RoleBadge = ({ role }) => (
-  <span className={`px-2.5 py-0.5 rounded-full text-xs font-semibold capitalize ${ROLE_COLORS[role] || 'bg-gray-100 text-gray-600'}`}>
-    {role}
-  </span>
-);
-
 const StatusBadge = ({ isActive }) =>
   isActive ? (
     <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-700">Active</span>
