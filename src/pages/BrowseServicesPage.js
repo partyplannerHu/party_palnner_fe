@@ -23,17 +23,17 @@ const BrowseServicesPage = () => {
   const [favoritedIds, setFavoritedIds] = useState(new Set());
   const [togglingId, setTogglingId] = useState(null);
 
-  // Filter states
+  // Filter states — all initialised from URL so refresh/share preserves them
   const [selectedCategory, setSelectedCategory] = useState(searchParams.get('category') || 'All');
-  const [selectedSubcategory, setSelectedSubcategory] = useState('All');
+  const [selectedSubcategory, setSelectedSubcategory] = useState(searchParams.get('subcategory') || 'All');
   const [searchQuery, setSearchQuery] = useState(searchParams.get('search') || '');
-  const [minPrice, setMinPrice] = useState('');
-  const [maxPrice, setMaxPrice] = useState('');
-  const [topRated, setTopRated] = useState(false);
-  const [priceSort, setPriceSort] = useState(''); // 'asc' | 'desc' | ''
+  const [minPrice, setMinPrice] = useState(searchParams.get('minPrice') || '');
+  const [maxPrice, setMaxPrice] = useState(searchParams.get('maxPrice') || '');
+  const [topRated, setTopRated] = useState(searchParams.get('topRated') === 'true');
+  const [priceSort, setPriceSort] = useState(searchParams.get('priceSort') || '');
 
   // Pagination states
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(Number(searchParams.get('page')) || 1);
   const [totalPages, setTotalPages] = useState(1);
   const [totalCount, setTotalCount] = useState(0);
   const limit = 12;
@@ -135,6 +135,20 @@ const BrowseServicesPage = () => {
 
     fetchListings();
   }, [selectedCategory, selectedSubcategory, searchQuery, currentPage, minPrice, maxPrice, topRated, priceSort]);
+
+  // Sync filters to URL so results are shareable and survive refresh
+  useEffect(() => {
+    const params = {};
+    if (selectedCategory !== 'All') params.category = selectedCategory;
+    if (selectedSubcategory !== 'All') params.subcategory = selectedSubcategory;
+    if (searchQuery) params.search = searchQuery;
+    if (minPrice) params.minPrice = minPrice;
+    if (maxPrice) params.maxPrice = maxPrice;
+    if (topRated) params.topRated = 'true';
+    if (priceSort) params.priceSort = priceSort;
+    if (currentPage > 1) params.page = String(currentPage);
+    setSearchParams(params, { replace: true });
+  }, [selectedCategory, selectedSubcategory, searchQuery, minPrice, maxPrice, topRated, priceSort, currentPage, setSearchParams]);
 
   // Load user's favorited listing IDs when authenticated
   useEffect(() => {
