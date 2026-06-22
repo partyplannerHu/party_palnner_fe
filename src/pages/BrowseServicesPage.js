@@ -115,7 +115,7 @@ const BrowseServicesPage = () => {
           params.sortBy = 'averageRating';
           params.order = 'desc';
         } else if (priceSort) {
-          params.sortBy = 'pricing.amount';
+          params.sortBy = 'price';
           params.order = priceSort;
         }
 
